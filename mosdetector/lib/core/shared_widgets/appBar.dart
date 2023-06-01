@@ -7,10 +7,12 @@ class CHSAppBar {
       foregroundColor: Colors.white,
       shadowColor: Colors.transparent,
         leading: GestureDetector(
-          onTap: onPressed(),
+          onTap: () => Navigator.pop(context),
           child: Icon(Icons.arrow_back_ios_new,
               color: hasPop ? Colors.white : Colors.black),
         ),
+          
+          
         centerTitle: true,
         title: Text(
           text,

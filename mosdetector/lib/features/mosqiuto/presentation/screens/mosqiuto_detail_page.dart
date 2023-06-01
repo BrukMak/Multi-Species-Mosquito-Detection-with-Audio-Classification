@@ -24,7 +24,7 @@ class _MosquitoesDetailState extends State<MosquitoesDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image(
-              image: const NetworkImage(demo),
+              image: const AssetImage("assets/images/mosquito.png"),
               width: double.infinity,
               height: UIConverter.getComponentHeight(context, 266),
             ),

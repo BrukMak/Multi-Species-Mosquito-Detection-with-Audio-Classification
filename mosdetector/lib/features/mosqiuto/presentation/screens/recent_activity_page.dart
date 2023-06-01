@@ -24,6 +24,15 @@ class _RecentPageState extends State<RecentPage> {
             itemCount: 10,
             itemBuilder: (context, ind) {
               return GestureDetector(
+                onTap: () {
+                        // onTap();
+                        print("againagainagainagainagain");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MosquitoesDetail())
+                                );
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           color: Color(0XFFF1F3FC),
@@ -50,34 +59,40 @@ class _RecentPageState extends State<RecentPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
                                 image: DecorationImage(
-                                    image: NetworkImage(demo),
+                                    image: AssetImage("assets/images/mosquito.png"),
                                     fit: BoxFit.fill),
                               ),
                             ),
                             SizedBox(
                               width: UIConverter.getComponentWidth(context, 8),
                             ),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Aedes Aegypti Mosquitoes",
-                                  style: TextStyle(
-                                      color: cardTitleColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                ),
                                 SizedBox(
+                                  width: UIConverter.getComponentWidth(context, 230),
+                                  child: const Text(
+                                    "Aedes Aegypti Mosquitoes",
+                                     maxLines:1,
+                                    style: TextStyle(
+                                        color: cardTitleColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                       
+                                        ),
+                                  ),
+                                ),
+                                const SizedBox(
                                   height: 6,
                                 ),
-                                Text(
+                                const Text(
                                   "11:03 pm",
                                   style: TextStyle(
                                       color: cardSubTitleColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400),
                                 ),
-                                Text(
+                                const Text(
                                   "Wed , Apr 12, 2023",
                                   style: TextStyle(
                                       color: cardSubTitleColor,
@@ -89,14 +104,7 @@ class _RecentPageState extends State<RecentPage> {
                           ],
                         ),
                       ),
-                      onTap: () {
-                        // onTap();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MosquitoesDetail())
-                                );
-                      })
+                      )
                   //  RecentCard(
                   //   onTap: (){
                   //     Navigator.push(

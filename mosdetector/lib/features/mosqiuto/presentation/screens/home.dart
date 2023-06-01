@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                   height: UIConverter.getComponentHeight(context, 10),
                 ),
                 Image(
-                  image: NetworkImage(demo),
+                  image: AssetImage("assets/images/home_page.png"),
                   width: double.infinity,
                   height: UIConverter.getComponentHeight(context, 246),
                 ),
@@ -80,15 +80,6 @@ class _HomePageState extends State<HomePage> {
                                   offset: Offset(0, 3),
                                   spreadRadius: 0.5)
                             ]
-
-                            //       boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.grey.withOpacity(0.5),
-                            //     spreadRadius: 5,
-                            //     blurRadius: 10,
-                            //     offset: Offset(0, 3), // changes the shadow direction
-                            //   ),
-                            // ],
                             ),
                         child: Column(children: [
                           Container(
@@ -99,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                               image: DecorationImage(
-                                  image: NetworkImage(demo), fit: BoxFit.fill),
+                                  image: AssetImage('assets/images/mosquito.png'), fit: BoxFit.fill),
                             ),
                           ),
                           const SizedBox(
@@ -112,13 +103,14 @@ class _HomePageState extends State<HomePage> {
                                     color: cardTitleColor,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500),
-                                maxLines: 2),
+                                maxLines: 1),
                           ),
                           SizedBox(
-                            height: UIConverter.getComponentHeight(context, 7),
+                            height: UIConverter.getComponentHeight(context, 4),
                           ),
                           SizedBox(
                             width: UIConverter.getComponentWidth(context, 176),
+                            
                             child: const Text(
                                 "Aedes aegypti, the yellow fever mosquito that can spread ...",
                                 style: TextStyle(
@@ -127,12 +119,13 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w500),
                                 maxLines: 2),
                           ),
-                          SizedBox(
-                            height: UIConverter.getComponentHeight(context, 25),
-                          )
+                          // SizedBox(
+                          //   height: UIConverter.getComponentHeight(context, 25),
+                          // )
                         ]),
                       ),
                       onTap: () {
+                        print("Ddddddddddddddddddddfffffffffffff");
                         Navigator.push(
                             context,
                             MaterialPageRoute(

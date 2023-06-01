@@ -39,6 +39,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   equatable: ^2.0.5
   dartz: ^0.10.1
+  http: ^1.0.0
 
 dev_dependencies:
   flutter_test:

@@ -7,7 +7,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/mosquito_repository.dart';
 
-class DetectMosquito extends UseCase<Mosquito, String> {
+class DetectMosquito implements UseCase<Mosquito, String> {
   MosqiutoRepository repository;
   
   DetectMosquito({required this.repository});

@@ -8,7 +8,7 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/mosquito_domain.dart';
 import '../repositories/mosquito_repository.dart';
 
-class GetMosquito extends UseCase<Mosquito, String> {
+class GetMosquito implements UseCase<Mosquito, String> {
   final MosqiutoRepository repository;
 
   GetMosquito(this.repository);

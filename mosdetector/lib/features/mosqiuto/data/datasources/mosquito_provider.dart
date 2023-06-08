@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:mosdetector/core/error/exception.dart';
 import 'package:mosdetector/core/utils/base_url.dart';
@@ -20,17 +21,24 @@ class MosquitoRemoteDataProviderImpl implements MosquitoRemoteDataProvider {
   @override
   Future<MosquitoModel> detectedMosquito(String audio) async {
     
-    final response = await client.post(
-      Uri.parse(baseUrl + "detect"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        // 'Authorization': 'Bearer $authToken'
-      },
-      body: jsonEncode(audio)
-    );   
+    Map<String, String> headers = {
+      "Authorization" : "Bearer "
+    };
+    var url = Uri.parse(baseUrl + "detect");
+    var request = http.MultipartRequest('POST', url);
+    request.files.add(
+      http.MultipartFile.fromBytes(
+          "audioFile", File(audio).readAsBytesSync(),
+          filename: audio)
+    );
+
+    request.headers.addAll(headers);
+
+    final response = await request.send();
+    var curResponse = await http.Response.fromStream(response);
 
     if (response.statusCode == 200){
-      return MosquitoModel.fromJson(jsonDecode(response.body)["data"]);
+      return MosquitoModel.fromJson(jsonDecode(curResponse.body)["data"]);
     }
 
     throw ServerException();

@@ -18,7 +18,7 @@ class _RecentPageState extends State<RecentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CHSAppBar.build(context, 'Recent', () {}, true),
+      appBar: CHSAppBar.build(context, 'Recent', () {}, false),
       body: SafeArea(
         child: ListView.builder(
             itemCount: 10,
@@ -30,7 +30,7 @@ class _RecentPageState extends State<RecentPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MosquitoesDetail())
+                                builder: (context) => MosquitoesDetail(description: description, name: "Aedes Aegypti",))
                                 );
                       },
                       child: Container(

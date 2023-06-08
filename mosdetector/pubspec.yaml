@@ -40,6 +40,9 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   http: ^1.0.0
+  get_it: ^7.6.0
+  flutter_sound: ^9.2.13
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

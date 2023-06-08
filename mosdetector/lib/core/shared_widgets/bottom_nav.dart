@@ -1,9 +1,11 @@
 //bottom navigation bar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mosdetector/core/utils/colors.dart';
 
 import '../../features/core/tutorial_page.dart';
+import '../../features/mosqiuto/presentation/bloc/mosqiuto_bloc.dart';
 import '../../features/mosqiuto/presentation/screens/home.dart';
 import '../../features/mosqiuto/presentation/screens/recent_activity_page.dart';
 
@@ -40,11 +42,10 @@ class _BottomNavState extends State<BottomNav> {
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         onTap: (int i) {
-          // if (i == 0) {
-          //   BlocProvider.of<AdminBloc>(context).add(AdminGetUsersEvent());
-          // } else if (i == 2) {
-          //    BlocProvider.of<ProfileBLoc>(context).add(AdminGetUsersEvent());
-          // }
+          // if (i == 0 || i == 1) {
+          //     BlocProvider.of<MosqiutoBloc>(context).add(MosquitoGetMosquitoesEvent());
+          // } 
+          
 
           setState(() {
             widget.index = i;

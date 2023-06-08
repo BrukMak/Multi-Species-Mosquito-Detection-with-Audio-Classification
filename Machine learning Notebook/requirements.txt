@@ -1,0 +1,6 @@
+Flask
+tensorflow
+librosa
+numpy
+gunicorn
+Werkzeug

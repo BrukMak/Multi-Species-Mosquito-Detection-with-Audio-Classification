@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:mosdetector/features/mosqiuto/presentation/screens/mosqiuto_detail_page.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:path/path.dart' as path;
 import '../../../../core/shared_widgets/appBar.dart';
 import '../../../../core/shared_widgets/primary_button.dart';
 import '../../../../core/utils/colors.dart';
@@ -39,8 +40,9 @@ class _RecorderPageState extends State<RecorderPage> {
 
   Future initRecorder() async {
     final status = await Permission.microphone.request();
+    final storageStatus = await Permission.storage.request();
 
-    if (status != PermissionStatus.granted) {
+    if (status != PermissionStatus.granted  || storageStatus != PermissionStatus.granted) {
       throw 'Microphone permission not granted';
     }
 
@@ -57,13 +59,26 @@ class _RecorderPageState extends State<RecorderPage> {
   }
 
   Future stop() async {
+
+
     if (!isRecorderReady) return;
+if (!isRecorderReady) return Future.value();
 
-    final path = await recorder.stopRecorder();
-    final audioFile = File(path);
-    print('Recorded audio to $audioFile');
+  final paths = await recorder.stopRecorder();
+  final audioFile = File(paths!);
 
-    return audioFile;
+  final appDir = await getApplicationDocumentsDirectory();
+  final wavFilePath = path.join(appDir.path, 'audio.wav');
+
+  if (!audioFile.existsSync()) {
+    throw 'Error: Recorded audio file does not exist';
+  }
+
+  audioFile.copySync(wavFilePath);
+
+  print('Recorded audio copied to $wavFilePath');
+
+  return File(wavFilePath);
   }
 
   Future resume() async {

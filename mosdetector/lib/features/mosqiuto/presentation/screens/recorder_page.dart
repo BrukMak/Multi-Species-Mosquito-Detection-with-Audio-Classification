@@ -60,7 +60,7 @@ class _RecorderPageState extends State<RecorderPage> {
     if (!isRecorderReady) return;
 
     final path = await recorder.stopRecorder();
-    final audioFile = File(path!);
+    final audioFile = File(path);
     print('Recorded audio to $audioFile');
 
     return audioFile;

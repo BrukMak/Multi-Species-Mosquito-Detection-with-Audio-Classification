@@ -1,30 +1,22 @@
 import '../../domain/entities/mosquito_domain.dart';
 
-class MosquitoModel extends Mosquito {
+class MosquitoModel {
+  final String name;
+  String time;
   MosquitoModel(
-    String id, {
-    required String name,
-    required String description,
-    required String detectedTime,
-  }) : super(
-            id: id,
-            description: description,
-            name: name,
-            detectedTime: detectedTime);
+      {required this.name, required this.time });
 
   factory MosquitoModel.fromJson(Map<String, dynamic> json) {
     return MosquitoModel(
-        json["id"],
         name: json["name"],
-        description: json["description"],
-        detectedTime: json["detectedTime"]);
+        time: DateTime.now().toString(),
+      );
   }
 
   Map<String, dynamic> toJson() {
     return {
       "name": name,
-      "description": description,
-      "detectedTime": detectedTime,
+      "time": time,
     };
   }
 }

@@ -1,6 +1,5 @@
-
 // write a code to check if the contected device is web or virtual and give appropriate base url
 
 String getBaseUrl() {
-  return 'https://api.themoviedb.org/3/';
+  return 'http://10.0.2.2:5000/predict';
 }

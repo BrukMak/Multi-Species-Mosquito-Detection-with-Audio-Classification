@@ -1,11 +1,12 @@
-
-
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:mosdetector/core/error/failures.dart';
 import 'package:mosdetector/features/mosqiuto/data/datasources/mosquito_provider.dart';
 import 'package:mosdetector/features/mosqiuto/data/models/mosquito_model.dart';
 import 'package:mosdetector/features/mosqiuto/domain/entities/mosquito_domain.dart';
 import 'package:mosdetector/features/mosqiuto/domain/repositories/mosquito_repository.dart';
+
+import '../datasources/local_source.dart';
 
 class MosquitoRepositoryImpl implements MosqiutoRepository {
   MosquitoRemoteDataProvider remoteDataProvider;
@@ -13,39 +14,25 @@ class MosquitoRepositoryImpl implements MosqiutoRepository {
   MosquitoRepositoryImpl({required this.remoteDataProvider});
 
   @override
-  Future<Either<Failure, Mosquito>> detectedMosquito(String audio) async {
+  Future<Either<Failure, MosquitoModel>> detectedMosquito(String audio) async {
     try {
-      MosquitoModel mosquitoModel = await remoteDataProvider.detectedMosquito(audio);
-      return Right(mosquitoModel);      
+      MosquitoModel mosquitoModel =
+          await remoteDataProvider.detectedMosquito(audio);
+      return Right(mosquitoModel);
     } catch (e) {
-      return Left(ServerFailure());
-    }
-    
-  }
-
-  @override
-  Future<Either<Failure, Mosquito>> getMosquito(String id) async {
-    try {
-      final mosquitoModels = await remoteDataProvider.getMosquito(id);
-
-      return Right(mosquitoModels);
-      
-    } catch (e) {
+      debugPrint(e.toString());
       return Left(ServerFailure());
     }
   }
 
-  @override
-  Future<Either<Failure, List<Mosquito>>> getMosquitoes() async {
+  Future<Either<Failure, List<MosquitoModel>>> getRecentDetections(
+      String name) async {
     try {
-      final mosquitoModels = await remoteDataProvider.getMosquitoes();
-
-      return Right(mosquitoModels);
-      
+      List<MosquitoModel> mosquitoModel =
+          await ShardPrefHelper.getMosquitos(name);
+      return Right(mosquitoModel);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(CacheFailure());
     }
-
   }
-  
 }

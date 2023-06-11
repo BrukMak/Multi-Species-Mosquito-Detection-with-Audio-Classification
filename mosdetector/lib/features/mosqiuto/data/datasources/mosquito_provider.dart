@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:mosdetector/core/error/exception.dart';
 import 'package:mosdetector/core/utils/base_url.dart';
 
 import '../models/mosquito_model.dart';
 import 'package:http/http.dart' as http;
 
+import 'local_source.dart';
+
 abstract class MosquitoRemoteDataProvider {
   Future<MosquitoModel> detectedMosquito(String audio);
-  Future<List<MosquitoModel>> getMosquitoes();
-  Future<MosquitoModel> getMosquito(String id);
 }
 
 class MosquitoRemoteDataProviderImpl implements MosquitoRemoteDataProvider {
@@ -20,61 +21,28 @@ class MosquitoRemoteDataProviderImpl implements MosquitoRemoteDataProvider {
 
   @override
   Future<MosquitoModel> detectedMosquito(String audio) async {
-    
-    Map<String, String> headers = {
-      "Authorization" : "Bearer "
-    };
-    var url = Uri.parse(baseUrl + "detect");
+    Map<String, String> headers = {"Authorization": "Bearer "};
+    var url = Uri.parse(baseUrl);
     var request = http.MultipartRequest('POST', url);
-    request.files.add(
-      http.MultipartFile.fromBytes(
-          "audioFile", File(audio).readAsBytesSync(),
-          filename: audio)
-    );
+    request.files.add(http.MultipartFile.fromBytes(
+        "file", File(audio).readAsBytesSync(),
+        filename: audio));
 
     request.headers.addAll(headers);
+    try {
+      final response = await request.send();
+      var curResponse = await http.Response.fromStream(response);
 
-    final response = await request.send();
-    var curResponse = await http.Response.fromStream(response);
+      if (response.statusCode == 200) {
+        var model = MosquitoModel.fromJson(jsonDecode(curResponse.body));
+        await ShardPrefHelper.addMosquito(model);
+        return model;
+      }
 
-    if (response.statusCode == 200){
-      return MosquitoModel.fromJson(jsonDecode(curResponse.body)["data"]);
+      throw ServerException();
+    } catch (e) {
+      debugPrint(e.toString());
+      throw ServerException();
     }
-
-    throw ServerException();
-  }
-
-  @override
-  Future<MosquitoModel> getMosquito(String id) async {
-    final response = await client.get(Uri.parse(baseUrl + id), 
-        headers: <String, String> {
-        'Content-Type': 'application/json; charset=UTF-8',
-        }
-    );  
-
-    if (response.statusCode == 200) {
-      return MosquitoModel.fromJson(jsonDecode(response.body)["data"]);
-    }
-    
-    throw ServerException();
-
-  }
-
-  @override
-  Future<List<MosquitoModel>> getMosquitoes() async {
-    
-    final response = await client.get(Uri.parse(baseUrl), 
-        headers: <String, String> {
-        'Content-Type': 'application/json; charset=UTF-8',
-        }
-    );  
-
-    if (response.statusCode == 200) {
-      List<dynamic> reponseData = jsonDecode(response.body)["data"] ?? [];
-      return reponseData.map((e) => MosquitoModel.fromJson(e)).toList();
-    }
-    
-    throw ServerException();
-
   }
 }

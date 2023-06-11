@@ -3,7 +3,6 @@ import '../features/mosqiuto/data/repositories/mosquito_repository_impl.dart';
 import '../features/mosqiuto/domain/repositories/mosquito_repository.dart';
 import '../features/mosqiuto/domain/usecases/detect_mosquito.dart';
 import '../features/mosqiuto/domain/usecases/get_mosquito.dart';
-import '../features/mosqiuto/domain/usecases/get_mosquitoes.dart';
 import '../features/mosqiuto/presentation/bloc/mosqiuto_bloc.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,12 +15,10 @@ Future<void> init() async {
   // Bloc
   sl.registerFactory(() => MosqiutoBloc(
       getMosquito: sl(),
-      getMosquitoes: sl(),
       detectMosquito: sl()));
 
   // Use cases
   sl.registerFactory(() => GetMosquito(sl()));
-  sl.registerFactory(() => GetMosquitoes(repository: sl()));
   sl.registerFactory(() => DetectMosquito(repository: sl()));
 
   // Repository

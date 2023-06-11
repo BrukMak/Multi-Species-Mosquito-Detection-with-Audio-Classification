@@ -22,64 +22,79 @@ class RecorderPage extends StatefulWidget {
 
 class _RecorderPageState extends State<RecorderPage> {
   final recorder = FlutterSoundRecorder();
-  bool isRecorderReady = false;
-  String finalAudioFile = "";
+bool isRecorderReady = false;
+String finalAudioFile = "";
 
-  @override
-  void initState() {
-    super.initState();
-    initRecorder();
+@override
+void initState() {
+  super.initState();
+  initRecorder();
+}
+
+@override
+void dispose() {
+  recorder.closeRecorder();
+  super.dispose();
+}
+
+Future<void> initRecorder() async {
+  final status = await Permission.microphone.request();
+  final storageStatus = await Permission.storage.request();
+
+  if (status != PermissionStatus.granted ||
+      storageStatus != PermissionStatus.granted) {
+    throw 'Microphone permission not granted';
   }
 
-  @override
-  void dispose() {
-    recorder.closeRecorder();
-
-    super.dispose();
-  }
-
-  Future initRecorder() async {
-    final status = await Permission.microphone.request();
-    final storageStatus = await Permission.storage.request();
-
-    if (status != PermissionStatus.granted  || storageStatus != PermissionStatus.granted) {
-      throw 'Microphone permission not granted';
-    }
-
+  try {
     await recorder.openRecorder();
-
     isRecorderReady = true;
-
     recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
+    print('Recorder initialized');
+  } catch (e) {
+    print('Failed to initialize recorder: $e');
   }
+}
 
   Future record() async {
-    if (!isRecorderReady) return;
-    await recorder.startRecorder(toFile: 'audio', codec: Codec.defaultCodec);
+  // if (!isRecorderReady) {
+  //   print('Recorder is not ready');
+  //   return;
+    
+  // }
+
+
+  // await recorder.startRecorder(toFile: 'audio.wav', codec: Codec.pcm16WAV);
+  // print('Recording started');
+
+
+   final appDir = await getTemporaryDirectory();
+  final filePath = path.join(appDir.path, 'audio.mp4');
+  await recorder.startRecorder(toFile: filePath, codec: Codec.aacMP4);
+}
+
+Future<File?> stop() async {
+  if (!isRecorderReady) {
+    print('Recorder is not ready');
+    return null;
   }
-
-  Future stop() async {
-
-
-    if (!isRecorderReady) return;
-if (!isRecorderReady) return Future.value();
 
   final paths = await recorder.stopRecorder();
-  final audioFile = File(paths!);
+  if (paths == null) {
+    print('Recording failed');
+    return null;
+  }
 
-  final appDir = await getApplicationDocumentsDirectory();
-  final wavFilePath = path.join(appDir.path, 'audio.wav');
-
+  final audioFile = File(paths);
   if (!audioFile.existsSync()) {
-    throw 'Error: Recorded audio file does not exist';
+    print('Recorded audio file does not exist');
+    return null;
   }
 
-  audioFile.copySync(wavFilePath);
+  print('Recorded audio copied to $audioFile');
+  return audioFile;
+}
 
-  print('Recorded audio copied to $wavFilePath');
-
-  return File(wavFilePath);
-  }
 
   Future resume() async {
     if (!isRecorderReady) {
@@ -97,19 +112,23 @@ if (!isRecorderReady) return Future.value();
     await recorder.pauseRecorder();
     print("puased");
   }
+
   bool something = false;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MosqiutoBloc, MosqiutoState>(
       listener: (context, state) {
-        if (something){
+        if (something) {
           Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MosquitoesDetail(description: description, name: "Aedes Aegypti Mosquitoes",)));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MosquitoesDetail(
+                        description: description,
+                        name: "Aedes Aegypti Mosquitoes",
+                      )));
         }
-        
+
         // TODO: implement listener
       },
       builder: (context, state) {
@@ -176,9 +195,9 @@ if (!isRecorderReady) return Future.value();
                         if (recorder.isRecording) {
                           final audioFile = await stop();
                           setState(() {
-                            finalAudioFile = audioFile.path;
+                            finalAudioFile = audioFile!.path;
                           });
-                          
+
                           print('Recorded audio again to $audioFile');
                         } else {
                           await record();
@@ -200,8 +219,8 @@ if (!isRecorderReady) return Future.value();
                     setState(() {
                       something = true;
                     });
-                    // BlocProvider.of<MosqiutoBloc>(context)
-                    //     .add(MosquitoDetectMosquitoesEvent(audio: finalAudioFile));
+                    BlocProvider.of<MosqiutoBloc>(context).add(
+                        MosquitoDetectMosquitoesEvent(audio: finalAudioFile));
                   },
                   height: UIConverter.getComponentHeight(context, 70),
                   width: UIConverter.getComponentWidth(context, 180),

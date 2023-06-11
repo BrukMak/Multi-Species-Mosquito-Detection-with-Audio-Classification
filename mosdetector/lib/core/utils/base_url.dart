@@ -2,5 +2,5 @@
 
 String getBaseUrl() {
   
-  return 'https://dc94-89-38-97-139.sa.ngrok.io/predict';
+  return 'https://231d-89-38-97-139.sa.ngrok.io/predict';
 }

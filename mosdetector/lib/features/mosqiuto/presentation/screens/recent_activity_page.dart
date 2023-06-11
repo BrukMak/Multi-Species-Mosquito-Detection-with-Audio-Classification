@@ -94,13 +94,14 @@ class _RecentPageState extends State<RecentPage> {
                                   const SizedBox(
                                     height: 6,
                                   ),
-                                  const Text(
-                                    "11:03 pm",
-                                    style: TextStyle(
+                                  Text(
+                                    state.mosqiutoes[ind].time.substring(11,19),
+                                    style: const TextStyle(
                                         color: cardSubTitleColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400),
                                   ),
+                                  const SizedBox(height: 5,),
                                   Text(
                                     state.mosqiutoes[ind].time.substring(0,10),
                                     style: const TextStyle(

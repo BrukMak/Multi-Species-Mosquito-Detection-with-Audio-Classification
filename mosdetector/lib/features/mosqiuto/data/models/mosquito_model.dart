@@ -9,7 +9,7 @@ class MosquitoModel {
   factory MosquitoModel.fromJson(Map<String, dynamic> json) {
     return MosquitoModel(
         name: json["name"],
-        time: DateTime.now().toString(),
+        time: json["time"],
       );
   }
 

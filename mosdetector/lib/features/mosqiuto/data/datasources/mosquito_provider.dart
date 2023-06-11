@@ -39,7 +39,10 @@ class MosquitoRemoteDataProviderImpl implements MosquitoRemoteDataProvider {
       print("returned" + curResponse.body);
 
       if (curResponse.statusCode == 200) {
-        var model = MosquitoModel.fromJson(jsonDecode(curResponse.body));
+        var cur = jsonDecode(curResponse.body);
+        cur["time"] = DateTime.now().toString();
+        var model = MosquitoModel.fromJson(cur);
+        
         if (mosList.contains(model.name)) {
           await ShardPrefHelper.addMosquito(model);
         }

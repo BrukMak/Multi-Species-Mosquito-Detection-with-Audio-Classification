@@ -25,8 +25,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
+            const Image(image: AssetImage("assets/images/rafiki.png")),
+            const SizedBox(height: 15,),
             Text(widget.message, style: const TextStyle(color: Colors.red),),
-            SizedBox(height: 15,),
+            const SizedBox(height: 30,),
             PrimaryButton(
                 text: "Back To Home",
                 backgroundColor: buttonColor,

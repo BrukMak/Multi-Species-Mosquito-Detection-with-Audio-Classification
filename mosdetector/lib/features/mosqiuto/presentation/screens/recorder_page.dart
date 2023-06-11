@@ -90,12 +90,9 @@ class _RecorderPageState extends State<RecorderPage> {
   Future<File> stopRecording() async {
     stopTimer();
     final recording = await _recorder.stop();
-    print(recording);
-    // final appDir = await getApplicationDocumentsDirectory();
-    // final wavFilePath = path.join(appDir.path, '_audio.wav');
+    print("pathhhh: $recording");
+   
     final recordingFile = File(recording!);
-
-    // await recordingFile.copy(wavFilePath);
 
     setState(() {
       _finalAudioFile = recording;
@@ -172,7 +169,7 @@ class _RecorderPageState extends State<RecorderPage> {
                       fontSize: 80, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
-                Row(
+                if (!detectState) Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(

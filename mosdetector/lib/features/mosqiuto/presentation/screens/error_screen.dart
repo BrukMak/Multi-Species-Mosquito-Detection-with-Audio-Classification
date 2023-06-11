@@ -7,7 +7,9 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/ui_converter.dart';
 
 class ErrorScreen extends StatefulWidget {
-  const ErrorScreen({super.key});
+  String message;
+  String appBarText ;
+  ErrorScreen({super.key, required this.message, required this.appBarText});
 
   @override
   State<ErrorScreen> createState() => _ErrorScreenState();
@@ -17,11 +19,14 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CHSAppBar.build(context, "error page", (){}, true),
+      appBar: CHSAppBar.build(context, widget.appBarText, (){}, true),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
-            const Text("No matching Mosquito found.", style: TextStyle(color: Colors.red),),
+            Text(widget.message, style: const TextStyle(color: Colors.red),),
+            SizedBox(height: 15,),
             PrimaryButton(
                 text: "Back To Home",
                 backgroundColor: buttonColor,

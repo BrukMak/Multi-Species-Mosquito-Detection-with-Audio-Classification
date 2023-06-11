@@ -27,8 +27,9 @@ class MosqiutoBloc extends Bloc<MosqiutoEvent, MosqiutoState> {
     on<MosquitoDetectMosquitoesEvent>(((event, emit) async {
       emit(MosquitoLoadingState());
       final result = await detectMosquito(event.audio);
+      print(result);
       result.fold((l) => emit(MosquitoFailureState(error: l.toString())),
-          (r) => emit(MosquitoSuccessState(mosqiutoes: [r])));
+          (r) => emit(MosquitoDetectedState(mosquitoModel : r)));
     }));
 
   

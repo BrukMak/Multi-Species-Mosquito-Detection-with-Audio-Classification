@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,12 +91,12 @@ class _HomePageState extends State<HomePage> {
                             width: UIConverter.getComponentWidth(context, 190),
                             height:
                                 UIConverter.getComponentHeight(context, 126),
-                            decoration:  BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius:
-                                 const BorderRadius.all(Radius.circular(20)),
+                                  const BorderRadius.all(Radius.circular(20)),
                               image: DecorationImage(
                                   image: AssetImage(
-                                      MosqiutoesList.mosquitoes[index].url) ,
+                                      MosqiutoesList.mosquitoes[index].url),
                                   fit: BoxFit.fill),
                             ),
                           ),
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(
                             width: UIConverter.getComponentWidth(context, 176),
-                            child:  Text(MosqiutoesList.mosquitoes[index].name,
+                            child: Text(MosqiutoesList.mosquitoes[index].name,
                                 style: const TextStyle(
                                     color: cardTitleColor,
                                     fontSize: 15,
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(
                             width: UIConverter.getComponentWidth(context, 176),
-                            child:  Text(
+                            child: Text(
                                 MosqiutoesList.mosquitoes[index].description,
                                 style: const TextStyle(
                                     color: cardSubTitleColor,
@@ -134,8 +133,10 @@ class _HomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MosquitoesDetail(
-                                      description: MosqiutoesList.mosquitoes[index].description,
-                                      name: MosqiutoesList.mosquitoes[index].name,
+                                      description: MosqiutoesList
+                                          .mosquitoes[index].description,
+                                      name:
+                                          MosqiutoesList.mosquitoes[index].name,
                                       url: MosqiutoesList.mosquitoes[index].url,
                                     )));
                       },
@@ -147,10 +148,14 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        width: 120,
+        height: 60,
+        padding: EdgeInsets.all(10),
         child: FloatingActionButton(
-          shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+          shape:
+              BeveledRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: () => {},
           // backgroundColor: buttonColor,
           child: PrimaryButton(
@@ -163,13 +168,13 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const RecorderPage()),
                     )
                   },
-              height: UIConverter.getComponentHeight(context, 70),
-              width: UIConverter.getComponentWidth(context, 180),
+              height: UIConverter.getComponentHeight(context, 60),
+              width: UIConverter.getComponentWidth(context, 120),
               fontFamily: "fontFamily",
               fontSize: 18,
               fontWeight: FontWeight.w500,
               textColor: mainTextColor,
-              borderRadius: 0),
+              borderRadius: 10),
         ),
       ),
       // PrimaryButton(
@@ -187,17 +192,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
-
 class MosquitoesDomain {
   String name;
   String description;
   String url;
 
-  MosquitoesDomain({required this.name, required this.description, required this.url});
-  
+  MosquitoesDomain(
+      {required this.name, required this.description, required this.url});
 }
-
 
 class MosqiutoesList {
   static List<MosquitoesDomain> mosquitoes = [
@@ -207,6 +209,5 @@ class MosqiutoesList {
     MosquitoesDomain(name: nameD, description: descriptionD, url: pictureD),
     MosquitoesDomain(name: nameE, description: descriptionE, url: pictureE),
     MosquitoesDomain(name: nameF, description: descriptionF, url: pictureF),
-
   ];
 }

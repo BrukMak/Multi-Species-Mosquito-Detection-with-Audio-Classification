@@ -27,6 +27,7 @@ class _RecentPageState extends State<RecentPage> {
       appBar: CHSAppBar.build(context, 'Recent', () {}, false),
       body: BlocConsumer<MosqiutoBloc, MosqiutoState>(
         listener: (context, state) {
+          print("STATATTTTttttttttttttttttttttttttt");
           
         },
         builder: (context, state) {
@@ -36,8 +37,7 @@ class _RecentPageState extends State<RecentPage> {
               itemBuilder: (context, ind) {
                 return GestureDetector(
                   onTap: () {
-                          // onTap();
-                          print("againagainagainagainagain");
+                          
                           Navigator.push(
                               context,
                               MaterialPageRoute(

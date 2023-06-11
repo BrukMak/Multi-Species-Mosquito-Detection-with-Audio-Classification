@@ -38,14 +38,7 @@ class _MosquitoesDetailState extends State<MosquitoesDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
             
-              Text(
-                widget.description,
-
-                style: const TextStyle(
-                    color: cardTitleColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500),
-              ),
+    
               SizedBox(height: UIConverter.getComponentHeight(context, 13),),
                Text(widget.description,
                   style: const TextStyle(

@@ -8,7 +8,8 @@ import '../../../../core/utils/colors.dart';
 class MosquitoesDetail extends StatefulWidget {
   String name;
   String description;
-  MosquitoesDetail({super.key, required this.description, required this.name});
+  String url;
+  MosquitoesDetail({super.key, required this.description, required this.name, required this.url});
 
   @override
   State<MosquitoesDetail> createState() => _MosquitoesDetailState();
@@ -24,7 +25,7 @@ class _MosquitoesDetailState extends State<MosquitoesDetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image(
-              image: const AssetImage("assets/images/mosquito.png"),
+              image:  AssetImage(widget.url),
               width: double.infinity,
               height: UIConverter.getComponentHeight(context, 266),
             ),
@@ -53,22 +54,7 @@ class _MosquitoesDetailState extends State<MosquitoesDetail> {
                       fontWeight: FontWeight.w400),
                   ),
                const SizedBox(height: 10,),
-              //  const Text(
-              //   "No other mosquito species has had such a dramatic impact on human history. Also known as the Yellow Fever Mosquito, Aedes aegypti was the first mosquito implicated as a vector of human disease. Experiments in the 1880’s by Cuban physician, Carlos Finlay, demonstrated that when one of these mosquitoes took a blood meal from a patient with Yellow Fever, it could transmit the disease to a healthy person just a couple days later during a subsequent bite. Initially, few people – including members of the scientific community – took the idea seriously, finding it hard to believe that such a small insect could kill a full grown person. It took a couple of decades and many additional experiments to finally prove Finlay’s theory.",
-              //     style: TextStyle(
-              //         color: cardSubTitleColor,
-              //         fontSize: 14,
-              //         fontWeight: FontWeight.w400),
-              //     ),
-              // const SizedBox(height: 10,),
-
-              // const Text(
-              //   "Today, many mosquito species have demonstrated the ability to be competent vectors of a variety of mosquito-borne diseases affecting not only humans but also many other animals. Aedes aegypti not only carries Yellow Fever, but is also a vector of West Nile virus, chikungunya, dengue, and more recently making the news as the primary vector of the Zika virus. While a vaccine exists now to protect us from Yellow Fever, vaccines for the other diseases are still under development and keeping a close eye on the Aedes aegypti species remains a top priority in many Integrated Mosquito Management (IMM) programs.",
-              //     style: TextStyle(
-              //         color: cardSubTitleColor,
-              //         fontSize: 14,
-              //         fontWeight: FontWeight.w400),
-              //     ),
+            
                 ],
               ),
             )

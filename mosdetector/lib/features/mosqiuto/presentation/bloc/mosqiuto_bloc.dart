@@ -35,7 +35,7 @@ class MosqiutoBloc extends Bloc<MosqiutoEvent, MosqiutoState> {
 
     on<MosquitoGetMosquitoesEvent>(((event, emit) async => {
           emit(MosquitoLoadingState()),
-          await getMosquito(event.name).then((value) => value.fold(
+          await getMosquito(NoParams()).then((value) => value.fold(
               (l) => emit(MosquitoFailureState(error: l.toString())),
               (r) => emit(MosquitoSuccessState(mosqiutoes: r))))
         }));

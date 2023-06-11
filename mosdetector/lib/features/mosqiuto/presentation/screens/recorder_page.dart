@@ -242,10 +242,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mosdetector/features/mosqiuto/presentation/screens/error_screen.dart';
+import 'package:mosdetector/features/mosqiuto/presentation/screens/name_mapper.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:record/record.dart';
 
 import '../../../../core/shared_widgets/appBar.dart';
 import '../../../../core/shared_widgets/primary_button.dart';
@@ -253,6 +254,7 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/ui_converter.dart';
 import '../bloc/mosqiuto_bloc.dart';
 import 'package:mosdetector/features/mosqiuto/presentation/screens/mosqiuto_detail_page.dart';
+import 'package:record/record.dart';
 
 class RecorderPage extends StatefulWidget {
   const RecorderPage({Key? key}) : super(key: key);
@@ -342,17 +344,25 @@ void initState() {
   Widget build(BuildContext context) {
     return BlocConsumer<MosqiutoBloc, MosqiutoState>(
       listener: (context, state) {
-        // if (state is MosquitoesDetectedState) {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => MosquitoesDetail(
-        //         description: state.description,
-        //         name: "Aedes Aegypti Mosquitoes",
-        //       ),
-        //     ),
-        //   );
-        // }
+        if (state is MosquitoDetectedState) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MosquitoesDetail(
+                description: dict[state.mosquitoModel.name]!.description,
+                name: state.mosquitoModel.name,
+                url: dict[state.mosquitoModel.name]!.description,
+              ),
+            ),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ErrorScreen(),
+            ),
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(

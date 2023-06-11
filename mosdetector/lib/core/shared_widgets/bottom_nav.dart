@@ -42,11 +42,10 @@ class _BottomNavState extends State<BottomNav> {
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         onTap: (int i) {
-          // if (i == 0 || i == 1) {
-          //     BlocProvider.of<MosqiutoBloc>(context).add(MosquitoGetMosquitoesEvent());
-          // } 
+          if (i == 1) {
+              BlocProvider.of<MosqiutoBloc>(context).add(MosquitoGetMosquitoesEvent());
+          } 
           
-
           setState(() {
             widget.index = i;
           });

@@ -11,8 +11,7 @@ class MosquitoGetMosquitoDetailEvent extends MosqiutoEvent {
 }
 
 class MosquitoGetMosquitoesEvent extends MosqiutoEvent {
-  String name;
-  MosquitoGetMosquitoesEvent({required this.name});
+  MosquitoGetMosquitoesEvent();
   @override
   List<Object> get props => [];
 }

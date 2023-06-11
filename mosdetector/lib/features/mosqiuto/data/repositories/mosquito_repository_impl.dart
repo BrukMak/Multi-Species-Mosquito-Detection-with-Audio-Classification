@@ -25,14 +25,18 @@ class MosquitoRepositoryImpl implements MosqiutoRepository {
     }
   }
 
-  Future<Either<Failure, List<MosquitoModel>>> getRecentDetections(
-      String name) async {
+  @override
+  Future<Either<Failure, List<MosquitoModel>>> getRecentDetections() async {
+
     try {
       List<MosquitoModel> mosquitoModel =
-          await ShardPrefHelper.getMosquitos(name);
+          await ShardPrefHelper.getMosquitos();
       return Right(mosquitoModel);
+
     } catch (e) {
       return Left(CacheFailure());
     }
+
   }
+  
 }

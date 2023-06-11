@@ -48,7 +48,6 @@ class _SplashScreeenState extends State<SplashScreeen> {
                 backgroundColor: buttonColor,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav()));
-                  
                   },
                 height: UIConverter.getComponentHeight(context, 70),
                 width: UIConverter.getComponentWidth(context, 348),

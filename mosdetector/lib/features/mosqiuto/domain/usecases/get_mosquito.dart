@@ -6,14 +6,14 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/mosquito_domain.dart';
 import '../repositories/mosquito_repository.dart';
 
-class GetMosquito implements UseCase<List<MosquitoModel>, String> {
+class GetMosquito implements UseCase<List<MosquitoModel>, NoParams> {
   final MosqiutoRepository repository;
 
   GetMosquito(this.repository);
 
   @override
-  Future<Either<Failure, List<MosquitoModel>>> call(String name) async {
-    return await repository.getRecentDetections(name);
+  Future<Either<Failure, List<MosquitoModel>>> call(NoParams params) async {
+    return await repository.getRecentDetections();
   }
 }
 

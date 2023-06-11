@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^10.2.0
   intl: ^0.18.1
   record: ^4.4.4
+  shared_preferences: ^2.1.2
 
 dev_dependencies:
   flutter_test:

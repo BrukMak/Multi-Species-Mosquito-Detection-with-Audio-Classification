@@ -32,6 +32,7 @@ This mobile app allows users to detect mosquito species through audio classifica
 
 ## Screenshots
 !["Home"](Screenshots/Home.jpg)
+<img src="Screenshots/FileUploadOrRecordAudio.jpg" alt="Home Page" width="400">
 
 
 ## Technologies Used

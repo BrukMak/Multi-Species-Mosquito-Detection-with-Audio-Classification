@@ -1,6 +1,6 @@
 # Mosquito Species Classification
 
-![Screenshot](screenshots/app_screenshot.png)
+![Screenshot](mosdetector/Screenshots/Home.jpg)
 
 Welcome to the Mosquito Species Classification project! This project aims to classify mosquito species based on their wingbeat sounds using machine learning techniques. It includes a mobile app for real-time mosquito detection and a machine learning notebook for model training and evaluation.
 
@@ -42,10 +42,10 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use and 
 Contributions to the project are welcome! If you have any suggestions, bug fixes, or additional features to add, please submit a pull request.
 
 ## Screenshots
-<img src="Screenshots/Home.jpg" alt="Home Page" width="200"> <img src="Screenshots/FileUploadOrRecordAudio.jpg" alt="File Upload Or Record Audio" width="200">
-<img src="Screenshots/AudioRecording.jpg" alt="Audio Recording Page" width="200">
-<img src="Screenshots/photo_2023-06-12_21-50-08.jpg" alt="Ready For Detection" width="200">
-<img src="Screenshots/MosquitoDetail.jpg" alt="Result Page" width="200">
+<img src="mosdetector/Screenshots/Home.jpg" alt="Home Page" width="200"> <img src="mosdetector/Screenshots/FileUploadOrRecordAudio.jpg" alt="File Upload Or Record Audio" width="200">
+<img src="mosdetector/Screenshots/AudioRecording.jpg" alt="Audio Recording Page" width="200">
+<img src="mosdetector/Screenshots/photo_2023-06-12_21-50-08.jpg" alt="Ready For Detection" width="200">
+<img src="mosdetector/Screenshots/MosquitoDetail.jpg" alt="Result Page" width="200">
 
 
 

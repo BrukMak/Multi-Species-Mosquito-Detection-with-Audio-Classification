@@ -16,9 +16,9 @@ Welcome to the Mosquito Species Classification project! This project aims to cla
 
 The project is structured as follows:
 
-- `mobile_app/`: Contains the source code for the mobile app.
-- `machine_learning_notebook/`: Contains the Jupyter notebook for using the pre-trained model.
-- `flask_backend/`: Contains the Flask backend code.
+- `mosdetector/`: Contains the source code for the mobile app.
+- `Machine Learning Notebook/`: Contains the Jupyter notebook for using the pre-trained model.
+- `Backend/`: Contains the Flask backend code.
 
 ## Usage
 
